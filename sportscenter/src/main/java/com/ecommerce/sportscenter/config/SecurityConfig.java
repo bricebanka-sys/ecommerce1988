@@ -6,6 +6,7 @@ import com.ecommerce.sportscenter.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -52,6 +53,9 @@ public class SecurityConfig {
                 // 2. Configuration des autorisations sur les URLs (Request Matchers)
                 .authorizeHttpRequests(request -> request
                         // Autoriser publiquement Swagger UI et OpenAPI
+
+                        // Autoriser préflight OPTIONS pour toutes les routes (utile pour CORS)
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
@@ -60,8 +64,13 @@ public class SecurityConfig {
                         // 2. Autoriser l'authentification et l'enregistrement
                         .requestMatchers("/api/account/login", "/api/account/register").permitAll()
                         .requestMatchers("/api/auth/login", "/api/auth/register").permitAll() // Endpoints publics
-                        .requestMatchers("/api/products/**").permitAll()             // Endpoints protégés
-                        .requestMatchers("/api/baskets/**").permitAll()
+                        // Autoriser explicitement les GET publics du catalogue (produits / brands / types)
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/products",
+                                "/api/products/**",
+                                "/api/products/brands",
+                                "/api/products/types"
+                        ).permitAll()
                         .anyRequest().authenticated()                                  // Toutes les autres requêtes nécessitent une authentification
                 )
 
