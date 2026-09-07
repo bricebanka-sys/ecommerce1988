@@ -77,8 +77,8 @@ export default function Catalog() {
         .finally(() => setLoading(false)); // Fin du chargement, que la requête réussisse ou échoue
     
   },[currentPage, pageSize]); // Le tableau de dépendances vide évite les boucles infinies de rendu)
-
-  const loadProducts = (selectedSort, searchKeyword='') => {
+  
+  const loadProducts = (selectedSort: string, searchKeyword: string = '') => {
       // Activer le spinner de chargement
       setLoading(true);
       const page = currentPage - 1
@@ -128,7 +128,7 @@ export default function Catalog() {
     // Déclenchement du chargement des produits à chaque changement de tri, marque ou type
     useEffect(() => {
       loadProducts(selectedSort);
-    }, [selectedBrandId, selectedTypeId]); 
+    }, [selectedSort, selectedBrandId, selectedTypeId]); 
 
     const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const selectedSort = (event.target as HTMLInputElement).value;
@@ -157,7 +157,7 @@ export default function Catalog() {
     }
     
     // Gestionnaire d'événement de changement de page
-const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
   setCurrentPage(page);
 };
 

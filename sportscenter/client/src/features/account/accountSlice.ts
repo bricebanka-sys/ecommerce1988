@@ -45,7 +45,7 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
 
 export const fetchCurrentUser = createAsyncThunk<User | null>(
     'auth/fetchCurrentUser',
-    async (_, thunkAPI) => {
+    async (_, _thunkAPI) => {
         try {
             // 1. Récupération de la chaîne JSON depuis le localStorage
             const userString = localStorage.getItem('user');
@@ -58,7 +58,7 @@ export const fetchCurrentUser = createAsyncThunk<User | null>(
 
             return null;
         } catch (error: unknown) {
-            console.error('Erreur lors de la récupération de l\'utilisateur courant :', error);
+            console.error('Error while fetching the current user:', error);
             return null;
         }
     }
@@ -67,12 +67,12 @@ export const fetchCurrentUser = createAsyncThunk<User | null>(
 
 export const logoutUser = createAsyncThunk<void>(
     'auth/logout',
-    async (_, thunkAPI) => {
+    async (_, _thunkAPI) => {
         try {
             // Suppression du jeton / utilisateur du stockage local
             localStorage.removeItem('user');
         } catch (error) {
-            console.error('Erreur lors de la déconnexion de l\'utilisateur :', error);
+            console.error('Error while logging out the user:', error);
         }
     }
 );
