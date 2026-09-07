@@ -61,7 +61,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/account/login", "/api/account/register").permitAll()
                         .requestMatchers("/api/auth/login", "/api/auth/register").permitAll() // Endpoints publics
                         .requestMatchers("/api/products/**").permitAll()             // Endpoints protégés
-                        .requestMatchers("/api/baskets/**").authenticated()
+                        .requestMatchers("/api/baskets/**").permitAll()
                         .anyRequest().authenticated()                                  // Toutes les autres requêtes nécessitent une authentification
                 )
 

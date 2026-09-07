@@ -13,7 +13,7 @@ const sleep = () => new Promise(resolve => setTimeout(resolve, 1000));
 // 1. Définition de l'URL de base du backend Spring Boot
 // axios.defaults.baseURL = 'http://localhost:8081/api/';
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8081/api';
 
 
 // Intercepteur de REQUÊTE : attache automatiquement le token JWT à chaque appel sortant

@@ -13,9 +13,10 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Applique le CORS à toutes les routes de l'API
                 .allowedOriginPatterns("http://localhost:3000",
-                        "https://sportscenter-api-mvds1988.onrender.com") // Autorise toutes les origines (ex: http://localhost:3000)
+                        "https://ecommerce1988.vercel.app") // Autorise toutes les origines (ex: http://localhost:3000)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Méthodes HTTP autorisées
-                .allowedHeaders("*"); // Autorise tous les en-têtes
+                .allowedHeaders("*") // Autorise tous les en-têtes
+                .allowCredentials(true); // Permet l'envoi de cookies, headers d'authentification, etc.
     }
 }
 
