@@ -11,9 +11,9 @@ import type { Basket } from '../models/basket';
 const sleep = () => new Promise(resolve => setTimeout(resolve, 1000));
 
 // 1. Définition de l'URL de base du backend Spring Boot
-// axios.defaults.baseURL = 'http://localhost:8081/api/';
 
-axios.defaults.baseURL =  'https://sportscenter-api-mvds1988.onrender.com/api';
+
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'https://sportscenter-api-mvds1988.onrender.com/api';
 
 
 // Intercepteur de REQUÊTE : attache automatiquement le token JWT à chaque appel sortant
@@ -84,7 +84,7 @@ const requests = {
 // Service regroupant les requêtes liées au catalogue / magasin
 const Store = {
   // URL de base de l'API Spring Boot
-   apiUrl: 'http://localhost:8081/api/products',
+  apiUrl: `${import.meta.env.VITE_API_URL}/products`,
   list: (page: number = 1, size: number = 10, brandId?: number, typeId?: number, url?: string) => {
 
     let requestUrl = url || `products?page=${page-1}&size=${size}`;

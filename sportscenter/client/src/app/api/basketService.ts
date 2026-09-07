@@ -11,7 +11,7 @@ import { createId } from '@paralleldrive/cuid2';
 class BasketService {
 
   // URL de base pour l'API du panier(basket)
-  apiUrl = 'http://localhost:8081/api/baskets';
+  apiUrl = `${import.meta.env.VITE_API_URL}/baskets`;
 
   // 1. Récupération du panier depuis l'API distante
   async getBasketFromApi(){
