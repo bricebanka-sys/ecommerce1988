@@ -12,11 +12,12 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Applique le CORS à toutes les routes de l'API
-                .allowedOriginPatterns("http://localhost:3000") // Autorise toutes les origines (ex: http://localhost:3000)
+                .allowedOriginPatterns("http://localhost:3000",
+                        "https://ton-app.vercel.app") // Autorise toutes les origines (ex: http://localhost:3000)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Méthodes HTTP autorisées
                 .allowedHeaders("*"); // Autorise tous les en-têtes
     }
 }
 
 
-// ----------Mesmin-Dev---------------------------------
+// ------------------------Mesmin-Dev---------------------------------
